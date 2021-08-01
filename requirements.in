@@ -1,0 +1,13 @@
+# Core dependencies
+IPython
+notebook
+jinja2
+
+# Test dependencies
+flake8
+pytest
+pytest-cov
+
+# Other
+pip-tools
+twine

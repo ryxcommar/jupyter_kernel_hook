@@ -1,0 +1,7 @@
+{
+  "NotebookApp": {
+    "nbserver_extensions": {
+      "html_cell_magic": true
+    }
+  }
+}

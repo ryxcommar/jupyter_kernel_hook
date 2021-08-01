@@ -1,0 +1,15 @@
+{%- set _add_to_globals = add_to_globals | default(False) -%}
+# -*- coding: utf-8 -*-
+def __jupyter_kernel_hook() -> None:
+    """We want to check if the extension is enabled before importing.
+
+    We hide everything behind a function to locally scope these objects.
+    Otherwise they will be imported into the Notebook instance!
+    """
+    from jupyter_kernel_hook import extension_is_enabled
+    if extension_is_enabled("{{ script_info.path }}"):
+        {{ script_info.render(add_to_globals=_add_to_globals) | indent(8) }}
+
+
+__jupyter_kernel_hook()
+del __jupyter_kernel_hook

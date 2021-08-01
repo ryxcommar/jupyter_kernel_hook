@@ -1,0 +1,22 @@
+name: Flake8
+
+on:
+- push
+- pull_request
+
+jobs:
+  test:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.9.x
+        architecture: x64
+    - name: Install packages
+      run: |
+        pip install --upgrade pip
+        pip install -r requirements.in
+    - name: Run flake8
+      run: flake8 jupyter_kernel_hook/
