@@ -5,6 +5,8 @@
 
 A simple way to turn your package into a Jupyter server extension that automatically preload into an IPython kernel.
 
+You can install this package via `pip install jupyter-kernel-hook`.
+
 ## Example
 
 Add the following to your package's `__init__.py`:
@@ -33,8 +35,7 @@ Now when a user runs `jupyter serverextension enable --py my_package`, your pack
 * **Intuitive behavior.** Your startup script can be enabled and disabled through `jupyter serverextension enable --py my_package`.
   * When your extension is **enabled**, it will preload (and invoke an optional function call) in each IPython kernel.
   * When your extension is **disabled**, it is never preloaded / imported.
-* **Performance.** Everything is lazy-loaded to reduce overhead and required dependencies for non-IPython runtimes.
-  * For Python 3.7+, there is additional lazy-loading, mostly to prevent initializing the Jinja environment which is rarely used except when the startup script needs to be written, which is very infrequent if `overwrite=False` is on. This shaves a few milliseconds when firing up a Jupyter server.
+* **Performance.** Everything is lazy-loaded to reduce overhead and required dependencies. (`jupyter_kernel_hook` is imported in various contexts-- the server starting up, kernels starting up-- and different contexts require different things.)
 
 ## Advanced
 
@@ -106,6 +107,11 @@ from setuptools import setup
 # ...
 
 setup(
+    # ...
+    install_requires=[
+        # ...
+        "jupyter-kernel-hook"
+    ],
     # ...
     include_package_data=True,
     data_files=[

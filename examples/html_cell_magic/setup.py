@@ -8,8 +8,8 @@ setup(
     packages=["html_cell_magic"],
     include_package_data=True,
     install_requires=[
-        "IPython",
-        "notebook"
+        "jupyter-kernel-hook",
+        "IPython"
     ],
     # Note: for editable install:
     # destpath=venv/etc/jupyter/jupyter_notebook_config.d
