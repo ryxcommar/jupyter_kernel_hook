@@ -27,10 +27,6 @@ def _get_startup_dir() -> str:
     from IPython.paths import get_ipython_dir
     from IPython.core.profiledir import ProfileDir
 
-    print(get_ipython_dir())
-    import glob
-    print(glob.glob(get_ipython_dir() + '*'))
-
     profile_dir = ProfileDir.find_profile_dir_by_name(
         get_ipython_dir(),
         "default"

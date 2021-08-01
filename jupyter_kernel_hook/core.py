@@ -146,7 +146,7 @@ def main(
     # already enabled. This is just a safeguard against unintended behavior.
     # It's good to be cautious when editing a user's file system.
 
-    if _app_enabled_extensions(nb_app, script_info.path):
+    if not _app_enabled_extensions(nb_app, script_info.path):
         return
 
     # Now we've established that the extension is enabled.
