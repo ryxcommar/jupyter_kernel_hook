@@ -1,7 +1,6 @@
 # flake8: noqa: F821
-"""Lazy loaded globals. Sadly they must be eagerly loaded in Python 3.6."""
+"""Globals that are lazy-loaded as needed to keep things slim."""
 import os
-import sys
 import typing as t
 
 
