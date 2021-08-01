@@ -44,47 +44,47 @@ class ScriptInfoCase:
 
 render_cases = [
     ScriptInfoCase(
-        text="some_package",
+        text="fake_extension",
         script="""
-            import some_package  # noqa: F401
+            import fake_extension  # noqa: F401
             """
     ),
     ScriptInfoCase(
-        text="some_package:func()",
+        text="fake_extension:func()",
         script="""
-            from some_package import func
+            from fake_extension import func
             func()
             """
     ),
     ScriptInfoCase(
-        text="some_package:func(a='apples')",
+        text="fake_extension:func(a='apples')",
         script="""
-            from some_package import func
+            from fake_extension import func
             func(a='apples')
             """
     ),
     ScriptInfoCase(
-        text="some_package:func(ip)",
+        text="fake_extension:func(ip)",
         script="""
-            from some_package import func
+            from fake_extension import func
             from IPython import get_ipython
             ip = get_ipython()
             func(ip)
             """
     ),
     ScriptInfoCase(
-        text="some_package:func(ip=ip)",
+        text="fake_extension:func(ip=ip)",
         script="""
-            from some_package import func
+            from fake_extension import func
             from IPython import get_ipython
             ip = get_ipython()
             func(ip=ip)
             """
     ),
     ScriptInfoCase(
-        text="some_package:func(2, ip=ip, a='apples')",
+        text="fake_extension:func(2, ip=ip, a='apples')",
         script="""
-            from some_package import func
+            from fake_extension import func
             from IPython import get_ipython
             ip = get_ipython()
             func(2, ip=ip, a='apples')
@@ -149,3 +149,17 @@ def test_core_main(nb_app, script_info_case,
     actual_contents = f.read_text(encoding="utf8")
 
     assert actual_contents == expected_contents
+
+
+def test_core_main_disabled_ext(
+        nb_app, ipython_scripts_dir
+):
+    core.main(
+        nb_app,
+        "disabled_extension"
+    )
+
+    filename = ScriptInfo.from_str("disabled_extension").gen_filename()
+    f = ipython_scripts_dir.join(filename)
+
+    assert not f.exists()
